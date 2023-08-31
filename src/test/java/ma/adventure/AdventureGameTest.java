@@ -1,5 +1,6 @@
 package ma.adventure;
 
+import ma.adventure.exception.IllegalMovementException;
 import ma.adventure.model.Direction;
 import ma.adventure.model.Map;
 import ma.adventure.model.Position;
@@ -49,8 +50,8 @@ public class AdventureGameTest {
         assertEquals(expectedPosition, finalPosition);
     }
 
-	    @Test
-	    public void shouldEndAt_7_5_WhenStartingAt_6_9() {
+	    @Test(expected = IllegalMovementException.class)
+	    public void shouldThrowException() {
 	        Position initialPosition = new Position(6, 9);
 	        List<Direction> directions = Arrays.asList(
 					Direction.O, Direction.O,
@@ -62,9 +63,5 @@ public class AdventureGameTest {
 
 	        GameCharacter character = new GameCharacter(map, initialPosition);
 	        character.move(directions);
-
-	        String finalPosition = character.getCurrentPosition();
-	        String expectedPosition = "(7,5)";
-	        assertEquals(expectedPosition, finalPosition);
 	    }
 }
